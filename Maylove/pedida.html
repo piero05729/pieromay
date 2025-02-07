@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín? 💖</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        h1 {
+            color: #ff4d4d;
+            margin-top: 50px;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+        }
+        #yes {
+            background-color: #ff4d4d;
+            color: white;
+            transition: transform 0.3s;
+        }
+        #yes:hover {
+            transform: scale(1.2);
+        }
+        #no {
+            background-color: #999;
+            color: white;
+            position: absolute;
+        }
+        @keyframes float-hearts {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: float-hearts 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Quieres ser mi San Valentín? 💖</h1>
+    <div class="container">
+        <button id="yes" class="btn">Sí ❤️</button>
+        <button id="no" class="btn">No 💔</button>
+    </div>
+    <audio id="music" autoplay loop>
+        <source src="tu_cancion_romantica.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        const noBtn = document.getElementById("no");
+        let moveCount = 0;
+
+        noBtn.addEventListener("mouseover", function() {
+            moveCount++;
+            if (moveCount < 6) {
+                let x = Math.random() * (window.innerWidth - 100);
+                let y = Math.random() * (window.innerHeight - 50);
+                noBtn.style.left = `${x}px`;
+                noBtn.style.top = `${y}px`;
+            } else {
+                noBtn.style.display = "none";
+            }
+        });
+
+        document.getElementById("yes").addEventListener("click", function() {
+            document.body.innerHTML = '<h1>¡Sabía que dirías que sí! 💖😍</h1>';
+        });
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
